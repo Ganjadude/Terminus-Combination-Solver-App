@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             padding: 20px;
             margin: 0;
-            background-color: #f4f4f4; /* Background color instead of image */
+            background-color: #f4f4f4;
             color: black;
             text-align: center;
         }
@@ -19,7 +19,7 @@
             font-size: 16px;
             width: 80%;
             max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.6); /* Transparent background for readability */
+            background-color: rgba(0, 0, 0, 0.6);
             border: none;
             color: white;
         }
@@ -40,8 +40,10 @@
     <p id="results"></p>
 
     <script>
-        // Function to handle the solve logic
-        document.getElementById("btnSolve").addEventListener("click", function() {
+        let isSolved = false; // Flag to check if the problem is solved or not
+
+        // Function to handle solving logic
+        function solve() {
             // Get values from input fields
             const X = parseFloat(document.getElementById("txtX").value);
             const Y = parseFloat(document.getElementById("txtY").value);
@@ -65,21 +67,30 @@
                 3 - ${result3}
             `;
 
-            // Change button text to "Retry" after solving
+            // Change button text to "Retry"
             document.getElementById("btnSolve").innerText = "Retry";
-        });
+            isSolved = true; // Mark as solved
+        }
 
-        // Handle Retry functionality
+        // Function to handle retry logic
+        function retry() {
+            // Clear inputs and results
+            document.getElementById("txtX").value = '';
+            document.getElementById("txtY").value = '';
+            document.getElementById("txtZ").value = '';
+            document.getElementById("results").innerHTML = '';
+
+            // Change button text back to "Solve"
+            document.getElementById("btnSolve").innerText = "Solve";
+            isSolved = false; // Mark as not solved
+        }
+
+        // Event listener for the Solve/Retry button
         document.getElementById("btnSolve").addEventListener("click", function() {
-            if (document.getElementById("btnSolve").innerText === "Retry") {
-                // Clear inputs and results
-                document.getElementById("txtX").value = '';
-                document.getElementById("txtY").value = '';
-                document.getElementById("txtZ").value = '';
-                document.getElementById("results").innerHTML = '';
-
-                // Change button text back to "Solve"
-                document.getElementById("btnSolve").innerText = "Solve";
+            if (isSolved) {
+                retry(); // Call retry if already solved
+            } else {
+                solve(); // Call solve if not yet solved
             }
         });
     </script>
