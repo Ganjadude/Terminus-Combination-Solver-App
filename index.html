@@ -6,93 +6,89 @@
     <title>Terminus Combination Solver</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: black;
-            text-align: center;
+            background-image: url('https://your-username.github.io/your-repository-name/Icons/CoD-Zombies-dev-responds-to-calls-for-Zombie-Chronicles-2-DLC.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Text color for contrast */
         }
-        input, button {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
+
+        .container {
             width: 80%;
-            max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: none;
-            color: white;
+            margin: auto;
+            padding: 20px;
         }
-        #results {
+
+        .result {
             margin-top: 20px;
-            font-size: 18px;
-            color: black;
+        }
+
+        #retryBtn {
+            display: none; /* Hide Retry button initially */
         }
     </style>
 </head>
 <body>
+
+<div class="container">
     <h1>Terminus Combination Solver</h1>
-    <p>Enter your values for X, Y, and Z below to get the results:</p>
-    <label for="txtX">X: </label><input type="number" id="txtX" /><br />
-    <label for="txtY">Y: </label><input type="number" id="txtY" /><br />
-    <label for="txtZ">Z: </label><input type="number" id="txtZ" /><br />
-    <button id="btnSolve">Solve</button>
-    <p id="results"></p>
+    
+    <!-- Input fields for X, Y, Z -->
+    <input type="text" id="txtX" placeholder="Enter value for X">
+    <input type="text" id="txtY" placeholder="Enter value for Y">
+    <input type="text" id="txtZ" placeholder="Enter value for Z">
 
-    <script>
-        let isSolved = false; // Flag to check if the problem is solved or not
+    <!-- Solve Button -->
+    <button id="btnSolve" onclick="solveEquations()">Solve</button>
 
-        // Function to handle solving logic
-        function solve() {
-            // Get values from input fields
-            const X = parseFloat(document.getElementById("txtX").value);
-            const Y = parseFloat(document.getElementById("txtY").value);
-            const Z = parseFloat(document.getElementById("txtZ").value);
+    <!-- Retry Button -->
+    <button id="retryBtn" onclick="retryInput()">Retry</button>
 
-            // Check if values are valid
-            if (isNaN(X) || isNaN(Y) || isNaN(Z)) {
-                alert("Please enter valid numbers.");
-                return;
-            }
+    <!-- Results -->
+    <div id="results" class="result"></div>
+</div>
 
-            // Calculate results
-            const result1 = 2 * X + 11;
-            const result2 = (2 * Z + Y) - 5;
-            const result3 = Y + Z - X;
+<script>
+    function solveEquations() {
+        // Get input values
+        let x = parseFloat(document.getElementById("txtX").value);
+        let y = parseFloat(document.getElementById("txtY").value);
+        let z = parseFloat(document.getElementById("txtZ").value);
 
-            // Display results
-            document.getElementById("results").innerHTML = `Results:<br>
-                1 - ${result1}<br>
-                2 - ${result2}<br>
-                3 - ${result3}
-            `;
-
-            // Change button text to "Retry"
-            document.getElementById("btnSolve").innerText = "Retry";
-            isSolved = true; // Mark as solved
+        // Check if inputs are valid numbers
+        if (isNaN(x) || isNaN(y) || isNaN(z)) {
+            alert("Please enter valid numbers for X, Y, and Z.");
+            return;
         }
 
-        // Function to handle retry logic
-        function retry() {
-            // Clear inputs and results
-            document.getElementById("txtX").value = '';
-            document.getElementById("txtY").value = '';
-            document.getElementById("txtZ").value = '';
-            document.getElementById("results").innerHTML = '';
+        // Perform calculations
+        let result1 = 2 * x + 11;
+        let result2 = (2 * z + y) - 5;
+        let result3 = y + z - x;
 
-            // Change button text back to "Solve"
-            document.getElementById("btnSolve").innerText = "Solve";
-            isSolved = false; // Mark as not solved
-        }
+        // Show results
+        document.getElementById("results").innerHTML = `
+            <p>Result 1: ${result1}</p>
+            <p>Result 2: ${result2}</p>
+            <p>Result 3: ${result3}</p>
+        `;
 
-        // Event listener for the Solve/Retry button
-        document.getElementById("btnSolve").addEventListener("click", function() {
-            if (isSolved) {
-                retry(); // Call retry if already solved
-            } else {
-                solve(); // Call solve if not yet solved
-            }
-        });
-    </script>
+        // Hide Solve button, show Retry button
+        document.getElementById("btnSolve").style.display = "none";
+        document.getElementById("retryBtn").style.display = "inline-block";
+    }
+
+    function retryInput() {
+        // Clear input fields and results
+        document.getElementById("txtX").value = '';
+        document.getElementById("txtY").value = '';
+        document.getElementById("txtZ").value = '';
+        document.getElementById("results").innerHTML = '';
+
+        // Show Solve button, hide Retry button
+        document.getElementById("btnSolve").style.display = "inline-block";
+        document.getElementById("retryBtn").style.display = "none";
+    }
+</script>
+
 </body>
 </html>
