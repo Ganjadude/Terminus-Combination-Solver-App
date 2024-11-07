@@ -40,37 +40,9 @@
     <p id="results"></p>
 
     <script>
-        // Function to handle the solve logic
+        // Single event listener for both solving and retrying
         document.getElementById("btnSolve").addEventListener("click", function() {
-            // Get values from input fields
-            const X = parseFloat(document.getElementById("txtX").value);
-            const Y = parseFloat(document.getElementById("txtY").value);
-            const Z = parseFloat(document.getElementById("txtZ").value);
-
-            // Check if values are valid
-            if (isNaN(X) || isNaN(Y) || isNaN(Z)) {
-                alert("Please enter valid numbers.");
-                return;
-            }
-
-            // Calculate results
-            const result1 = 2 * X + 11;
-            const result2 = (2 * Z + Y) - 5;
-            const result3 = Y + Z - X;
-
-            // Display results
-            document.getElementById("results").innerHTML = `Results:<br>
-                1 - ${result1}<br>
-                2 - ${result2}<br>
-                3 - ${result3}
-            `;
-
-            // Change button text to "Retry" after solving
-            document.getElementById("btnSolve").innerText = "Retry";
-        });
-
-        // Handle Retry functionality
-        document.getElementById("btnSolve").addEventListener("click", function() {
+            // Check if the button text is "Retry" (reset state)
             if (document.getElementById("btnSolve").innerText === "Retry") {
                 // Clear inputs and results
                 document.getElementById("txtX").value = '';
@@ -80,6 +52,32 @@
 
                 // Change button text back to "Solve"
                 document.getElementById("btnSolve").innerText = "Solve";
+            } else {
+                // Get values from input fields
+                const X = parseFloat(document.getElementById("txtX").value);
+                const Y = parseFloat(document.getElementById("txtY").value);
+                const Z = parseFloat(document.getElementById("txtZ").value);
+
+                // Check if values are valid
+                if (isNaN(X) || isNaN(Y) || isNaN(Z)) {
+                    alert("Please enter valid numbers.");
+                    return;
+                }
+
+                // Calculate results
+                const result1 = 2 * X + 11;
+                const result2 = (2 * Z + Y) - 5;
+                const result3 = Y + Z - X;
+
+                // Display results
+                document.getElementById("results").innerHTML = `Results:<br>
+                    1 - ${result1}<br>
+                    2 - ${result2}<br>
+                    3 - ${result3}
+                `;
+
+                // Change button text to "Retry" after solving
+                document.getElementById("btnSolve").innerText = "Retry";
             }
         });
     </script>
