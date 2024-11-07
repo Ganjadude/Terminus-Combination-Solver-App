@@ -42,16 +42,15 @@
     <script>
         // Single event listener for both solving and retrying
         document.getElementById("btnSolve").addEventListener("click", function() {
-            // Check if the button text is "Retry" (reset state)
-            if (document.getElementById("btnSolve").innerText === "Retry") {
-                // Clear inputs and results
+            const btn = document.getElementById("btnSolve");
+
+            // If the button text is "Retry", reset the form
+            if (btn.innerText === "Retry") {
                 document.getElementById("txtX").value = '';
                 document.getElementById("txtY").value = '';
                 document.getElementById("txtZ").value = '';
                 document.getElementById("results").innerHTML = '';
-
-                // Change button text back to "Solve"
-                document.getElementById("btnSolve").innerText = "Solve";
+                btn.innerText = "Solve"; // Change button back to "Solve"
             } else {
                 // Get values from input fields
                 const X = parseFloat(document.getElementById("txtX").value);
@@ -76,8 +75,8 @@
                     3 - ${result3}
                 `;
 
-                // Change button text to "Retry" after solving
-                document.getElementById("btnSolve").innerText = "Retry";
+                // Change button text to "Retry"
+                btn.innerText = "Retry";
             }
         });
     </script>
